@@ -47,4 +47,12 @@
 
 (define teapot-list (obj-load "teapot.obj"))
 
-(remove-comments teapot-list)
+
+(define (obj-line line) 
+  (list (string->symbol (car line)) (rest line))) 
+
+(define (lex-obj lines)
+    (map (λ (l) (obj-line (string-split l)) ) lines)
+ )
+
+(lex-obj (remove-comments teapot-list))
