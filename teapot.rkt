@@ -1,5 +1,5 @@
 #lang racket/gui
- 
+
 ;File format[edit] http://en.wikipedia.org/wiki/Wavefront_.obj_file
 ; http://isg.cs.tcd.ie/spheretree/models/teapot.obj
 ;Lines beginning with a hash character (#) are comments.
@@ -28,16 +28,23 @@
 ;  f 6/4/1 3/5/3 7/6/5
 ;  f ...
 ;  ...
- 
+
 (struct obj (vertices texture-vertices  vertex-normals faces))
 (struct vertice (x y z))
 
-;; obj-load ; filename ->
-  (define (obj-load filename)
-    (let* ((p (open-input-file filename))
-           (doc (xml->xexpr (document-element (read-xml p)))))
-      (let ((ret (parse (element-list (cdddr doc)))))
-        (close-input-port p)
-        ret)))
- 
-(obj-load "teapot.obj")
+;; obj-load ; filename -> list
+(define (obj-load filename)
+  (let* ((input-port (open-input-file filename))
+         (doc (port->lines input-port)))
+    doc))
+
+(define (remove-comments list-of-strings)
+  (define (is-not-comment-line? line)
+    (if (or (= (string-length line) 0)
+            (equal? (string-ref line 0) #\#))
+        #f #t))
+  (filter is-not-comment-line? list-of-strings))
+
+(define teapot-list (obj-load "teapot.obj"))
+
+(remove-comments teapot-list)
