@@ -57,4 +57,5 @@
  )
 
 (define teapot-list (lex-obj (remove-comments (obj-load "teapot.obj"))))
-(define 
+(define khronos-teapot (lex-obj (remove-comments (obj-load "khronos/teapot.obj"))))
+
