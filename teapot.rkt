@@ -37,7 +37,8 @@
   (let* ((input-port (open-input-file filename))
          (doc (port->lines input-port)))
     doc))
-
+;;remove-comments : list-of-strings -> list of strings
+;; removes blank lines and lines that start with #
 (define (remove-comments list-of-strings)
   (define (is-not-comment-line? line)
     (if (or (= (string-length line) 0)
@@ -45,14 +46,14 @@
         #f #t))
   (filter is-not-comment-line? list-of-strings))
 
-(define teapot-list (obj-load "teapot.obj"))
-
-
+;; obj-line : listof string -> listof symbol list
 (define (obj-line line) 
   (list (string->symbol (car line)) (rest line))) 
 
+;; lex-obj : listof strings -> listof listof symbol strings
 (define (lex-obj lines)
     (map (λ (l) (obj-line (string-split l)) ) lines)
  )
 
-(lex-obj (remove-comments teapot-list))
+(define teapot-list (lex-obj (remove-comments (obj-load "teapot.obj"))))
+(define 
