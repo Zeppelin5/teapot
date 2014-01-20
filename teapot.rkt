@@ -2,6 +2,7 @@
 
 ;File format[edit] http://en.wikipedia.org/wiki/Wavefront_.obj_file
 ; http://isg.cs.tcd.ie/spheretree/models/teapot.obj
+; https://www.khronos.org/registry/webgl/sdk/demos/webkit/resources/teapot.obj
 ;Lines beginning with a hash character (#) are comments.
 ;# this is a comment
 ;An OBJ file contains several types of definitions:
